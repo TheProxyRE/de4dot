@@ -270,6 +270,10 @@
     <Compile Include="deobfuscators\InitializedDataCreator.cs" />
     <Compile Include="deobfuscators\InlinedMethodsFinder.cs" />
     <Compile Include="deobfuscators\ISimpleDeobfuscator.cs" />
+    <Compile Include="deobfuscators\Manco_NET\AntiTamper.cs" />
+    <Compile Include="deobfuscators\Manco_NET\Deobfsucator.cs" />
+    <Compile Include="deobfuscators\Manco_NET\Junk.cs" />
+    <Compile Include="deobfuscators\Manco_NET\StringDecryter.cs" />
     <Compile Include="deobfuscators\MaxtoCode\CryptDecrypter.cs" />
     <Compile Include="deobfuscators\MaxtoCode\Decrypter6.cs" />
     <Compile Include="deobfuscators\MaxtoCode\DecrypterInfo.cs" />
@@ -405,6 +409,7 @@
       <LastGenOutput>CsvmResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>mkdir "..\$(OutDir)..\LICENSES"

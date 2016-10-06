@@ -88,8 +88,6 @@ namespace de4dot.code.deobfuscators.Unknown {
 				var fn = type.FullName;
 				if (fn == "ZYXDNGuarder")
 					return "DNGuard HVM";
-				if (type.Name.String.Contains("();\t"))
-					return "Manco .NET Obfuscator";
 				if (Regex.IsMatch(fn, @"^EMyPID_\d+_$"))
 					return "BitHelmet Obfuscator";
 				if (fn == "YanoAttribute")
