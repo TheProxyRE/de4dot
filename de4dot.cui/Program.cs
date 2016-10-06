@@ -109,11 +109,30 @@ namespace de4dot.cui {
 
 				Logger.n("");
 				Logger.n("de4dot v{0} Copyright (C) 2011-2015 de4dot@gmail.com", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
-				Logger.n("Latest version and source code: https://github.com/0xd4d/de4dot");
+				//Logger.n("Latest version and source code: https://github.com/0xd4d/de4dot");
 				Logger.n("");
 
-				var options = new FilesDeobfuscator.Options();
-				ParseCommandLine(args, options);
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Logger.n("Mod by:");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Logger.n("88888888888 888               8888888b.                                    ");
+                Logger.n("    888     888               888   Y88b                                   ");
+                Logger.n("    888     888               888    888                                   ");
+                Logger.n("    888     88888b.   .d88b.  888   d88P 888d888 .d88b.  888  888 888  888 ");
+                Logger.n("    888     888 \"88b d8P  Y8b 8888888P\"  888P\"  d88\"\"88b `Y8bd8P' 888  888 ");
+                Logger.n("    888     888  888 88888888 888        888    888  888   X88K   888  888 ");
+                Logger.n("    888     888  888 Y8b.     888        888    Y88..88P .d8\"\"8b. Y88b 888 ");
+                Logger.n("    888     888  888  \"Y8888  888        888     \"Y88P\"  888  888  \"Y88888 ");
+                Logger.n("                                                                       888 ");
+                Logger.n("                                                                  Y8b d88P ");
+                Logger.n("                                                                   \"Y88P\"  TM");
+                Console.ForegroundColor = ConsoleColor.Gray;
+                var options = new FilesDeobfuscator.Options();
+
+                if (args == null)
+                { }
+                else
+                    ParseCommandLine(args, options);
 				new FilesDeobfuscator(options).DoIt();
 			}
 			catch (ExitException ex) {
