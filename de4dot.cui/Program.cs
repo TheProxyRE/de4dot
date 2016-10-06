@@ -114,7 +114,7 @@ namespace de4dot.cui {
 
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Logger.n("Mod by:");
-                Console.ForegroundColor = ConsoleColor.Green;
+                Console.ForegroundColor = ConsoleColor.Blue;
                 Logger.n("88888888888 888               8888888b.                                    ");
                 Logger.n("    888     888               888   Y88b                                   ");
                 Logger.n("    888     888               888    888                                   ");
