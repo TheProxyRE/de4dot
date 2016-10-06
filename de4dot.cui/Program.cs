@@ -115,17 +115,24 @@ namespace de4dot.cui {
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Logger.n("Mod by:");
                 Console.ForegroundColor = ConsoleColor.Cyan;
-                Logger.n("88888888888 888               8888888b.                                    ");
+                Logger.n("88888888888 888               8888888b.                                   ");
                 Logger.n("    888     888               888   Y88b                                   ");
-                Logger.n("    888     888               888    888                                   ");
+                Logger.n("    888     888               888    888                                  TM");
                 Logger.n("    888     88888b.   .d88b.  888   d88P 888d888 .d88b.  888  888 888  888 ");
                 Logger.n("    888     888 \"88b d8P  Y8b 8888888P\"  888P\"  d88\"\"88b `Y8bd8P' 888  888 ");
                 Logger.n("    888     888  888 88888888 888        888    888  888   X88K   888  888 ");
                 Logger.n("    888     888  888 Y8b.     888        888    Y88..88P .d8\"\"8b. Y88b 888 ");
                 Logger.n("    888     888  888  \"Y8888  888        888     \"Y88P\"  888  888  \"Y88888 ");
                 Logger.n("                                                                       888 ");
-                Logger.n("                                                                  Y8b d88P ");
-                Logger.n("                                                                   \"Y88P\"  TM");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("Credits: ");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Logger.n("                                                         Y8b d88P ");
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.Write("rtn-team.cc & uret.in & tuts4you.com & b-at-s.info");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Logger.n("                 \"Y88P\"");
+
                 Console.ForegroundColor = ConsoleColor.Gray;
                 var options = new FilesDeobfuscator.Options();
 
