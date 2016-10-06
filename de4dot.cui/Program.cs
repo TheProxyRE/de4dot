@@ -89,6 +89,7 @@ namespace de4dot.cui {
 				new de4dot.code.deobfuscators.Spices_Net.DeobfuscatorInfo(),
 				new de4dot.code.deobfuscators.Xenocode.DeobfuscatorInfo(),
                 new de4dot.code.deobfuscators.Manco_NET.DeobfuscatorInfo(),
+                new de4dot.code.deobfuscators.Yano.DeobfuscatorInfo(),
 			};
 			var dict = new Dictionary<string, IDeobfuscatorInfo>();
 			foreach (var d in local)

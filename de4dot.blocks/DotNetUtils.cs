@@ -125,7 +125,39 @@ namespace de4dot.blocks {
 			}
 		}
 
-		public static bool IsDelegate(IType type) {
+        public static MethodDef FindMethod(ModuleDef module, List<OpCode> OpcodesList)
+        {
+            foreach (var type in module.Types)
+            {
+                foreach (var method in type.Methods)
+                {
+                    if (!method.HasBody)
+                        break;
+                    var instr = method.Body.Instructions;
+                    if (instr.Count < OpcodesList.Count)
+                        continue;
+
+                    for (int i = 0; i < OpcodesList.Count - 1; i++)
+                        if (instr[i].OpCode != OpcodesList[i])
+                            goto next;
+                    return method;
+                    next:;
+                }
+
+            }
+            return null;
+        }
+
+        public static Instruction FindInstruction(IList<Instruction> instructions, OpCode opcode, int index)
+        {
+            int i = 0;
+            foreach (var instruction in instructions)
+                if (instruction.OpCode == opcode && i++ == index)
+                    return instruction;
+            return null;
+        }
+
+        public static bool IsDelegate(IType type) {
 			if (type == null)
 				return false;
 			var fn = type.FullName;

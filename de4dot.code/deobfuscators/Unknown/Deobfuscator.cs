@@ -90,8 +90,6 @@ namespace de4dot.code.deobfuscators.Unknown {
 					return "DNGuard HVM";
 				if (Regex.IsMatch(fn, @"^EMyPID_\d+_$"))
 					return "BitHelmet Obfuscator";
-				if (fn == "YanoAttribute")
-					return "Yano Obfuscator";
 			}
 			return null;
 		}

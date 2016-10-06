@@ -17,17 +17,17 @@
     along with de4dot.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+using de4dot.blocks;
 using dnlib.DotNet;
 using System;
 using System.Collections.Generic;
-
-namespace de4dot.code.deobfuscators.Manco_NET
+namespace de4dot.code.deobfuscators.Yano
 {
     public class DeobfuscatorInfo : DeobfuscatorInfoBase
     {
-        public const string THE_NAME = "Manco.Net";
-        public const string THE_TYPE = "mn";
-        const string DEFAULT_REGEX = DeobfuscatorBase.DEFAULT_ASIAN_VALID_NAME_REGEX;
+        public const string THE_NAME = "Yano";
+        public const string THE_TYPE = "yn";
+        const string DEFAULT_REGEX = @"!^[a-zA-Z1-9]{1,4}$" + DeobfuscatorBase.DEFAULT_VALID_NAME_REGEX;
 
         public DeobfuscatorInfo()
             : base(DEFAULT_REGEX)
@@ -55,9 +55,11 @@ namespace de4dot.code.deobfuscators.Manco_NET
 
         class Deobfuscator : DeobfuscatorBase
         {
-            AntiTamper antiTamper;
+            bool foundAttribute = false;
+            string Version = "";
+            TypeDef YanoAttribute;
+            ResourceDecryptor resDecryptor;
             StringDecryptor strDecryptor;
-            Junk junkDetector;
             internal class Options : OptionsBase
             {
             }
@@ -74,7 +76,7 @@ namespace de4dot.code.deobfuscators.Manco_NET
 
             public override string Name
             {
-                get { return TypeLong; }
+                get { return string.Format("{0} {1}", TypeLong, Version); }
             }
 
             public Deobfuscator(Options options)
@@ -85,51 +87,50 @@ namespace de4dot.code.deobfuscators.Manco_NET
             protected override int DetectInternal()
             {
                 int val = 0;
-                val += val < 100 ? Convert.ToInt32(antiTamper.Detected) * 100 : Convert.ToInt32(antiTamper.Detected) * 10;
+                if (foundAttribute) val = 100;
+                val += val < 100 ? Convert.ToInt32(resDecryptor.Detected) * 100 : Convert.ToInt32(resDecryptor.Detected) * 10;
                 val += val < 100 ? Convert.ToInt32(strDecryptor.Detected) * 100 : Convert.ToInt32(strDecryptor.Detected) * 10;
-                if (junkDetector.Detected) val += 10;
                 return val;
             }
 
             protected override void ScanForObfuscator()
             {
-                antiTamper = new AntiTamper(module);
-                antiTamper.Find();
-                strDecryptor = new StringDecryptor(module,DeobfuscatedFile);
-                strDecryptor.Find(DeobfuscatedFile);
-                junkDetector = new Junk(module);
-                junkDetector.Find();
+                foreach (var type in module.Types)
+                    if (type.FullName == "YanoAttribute")
+                    {
+                        foundAttribute = true;
+                        foreach (var field in type.Fields)
+                            if (field.Name == "Version")
+                                Version = (string)field.Constant.Value;
+                        YanoAttribute = type;
+                    }
+                strDecryptor = new StringDecryptor(module);
+                strDecryptor.Find();
+                resDecryptor = new ResourceDecryptor(module, strDecryptor);
+                resDecryptor.Find();
+
             }
 
             public override void DeobfuscateBegin()
             {
-                strDecryptor.Fix();
-
-                if (antiTamper.Detected)
-                    foreach (var method in antiTamper.Methods)
-                        junkDetector.AdditionalMethods.Add(method);
-
-                if (strDecryptor.Detected)
-                    foreach (var field in strDecryptor.ProxyFields)
-                        junkDetector.AdditionalFields.Add(field);
-
                 base.DeobfuscateBegin();
-
+                if (resDecryptor.Detected) resDecryptor.FixResources();
+                if (strDecryptor.Detected)
+                    staticStringInliner.Add(strDecryptor.Method, (method, gim, args) => strDecryptor.Decrypt((string)args[0], (int)args[1]));
             }
 
             public override void DeobfuscateEnd()
             {
-                junkDetector.Fix();
+                if (resDecryptor.toRemoveCall != null)
+                {
+                    DotNetUtils.GetModuleTypeCctor(module).Body.Instructions.Remove(resDecryptor.toRemoveCall);
+                    module.Resources.Remove(DotNetUtils.GetResource(module, resDecryptor.Name));
+                }
+                foreach (var method in resDecryptor.toRemove)
+                    method.DeclaringType.Methods.Remove(method);
+                if (strDecryptor.Detected) module.Types.Remove(strDecryptor.Method.DeclaringType);
 
-                List<TypeDef> junkTypes = new List<TypeDef>();
-                if (antiTamper.Detected)
-                    junkTypes.Add(antiTamper.Type);
-                if (strDecryptor.Detected)
-                    foreach (TypeDef typ in strDecryptor.Types)
-                        junkTypes.Add(typ);
-                if (junkDetector.Detected)
-                    junkTypes.Add(junkDetector.Type);
-                AddTypesToBeRemoved(junkTypes, "Junk Classes");
+                AddTypeToBeRemoved(YanoAttribute, "Yano Attribute");
                 base.DeobfuscateEnd();
             }
 

@@ -333,6 +333,9 @@
     <Compile Include="deobfuscators\ValueInlinerBase.cs" />
     <Compile Include="deobfuscators\Xenocode\Deobfuscator.cs" />
     <Compile Include="deobfuscators\Xenocode\StringDecrypter.cs" />
+    <Compile Include="deobfuscators\Yano\Deobfuscator.cs" />
+    <Compile Include="deobfuscators\Yano\ResourceDecryptor.cs" />
+    <Compile Include="deobfuscators\Yano\StringDecryptor.cs" />
     <Compile Include="DumpedMethodsRestorer.cs" />
     <Compile Include="HandleProcessCorruptedStateExceptionsAttribute.cs" />
     <Compile Include="IDeobfuscatorContext.cs" />

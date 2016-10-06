@@ -52,6 +52,7 @@ Supported obfuscators/packers
 * SmartAssembly
 * Spices.Net
 * Xenocode
+* Yano
 
 Some of the above obfuscators are rarely used (eg. Goliath.NET), so they have had much less testing. Help me out by reporting bugs or problems you find.
 
