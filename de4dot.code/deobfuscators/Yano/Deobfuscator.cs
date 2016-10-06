@@ -130,7 +130,6 @@ namespace de4dot.code.deobfuscators.Yano
                     method.DeclaringType.Methods.Remove(method);
                 if (strDecryptor.Detected) module.Types.Remove(strDecryptor.Method.DeclaringType);
 
-                AddTypeToBeRemoved(YanoAttribute, "Yano Attribute");
                 base.DeobfuscateEnd();
             }
 
