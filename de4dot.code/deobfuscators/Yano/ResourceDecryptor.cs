@@ -38,8 +38,8 @@ namespace de4dot.code.deobfuscators.Yano
         ModuleDefMD module;
         StringDecryptor strDecryptor;
         string resouceName;
-        long key1;
-        long key2;
+        long key1 = -1;
+        long key2 = -1;
         List<MethodDef> toremove = new List<MethodDef>();
         Instruction toremoveinstr;
         public List<MethodDef> toRemove
@@ -54,7 +54,7 @@ namespace de4dot.code.deobfuscators.Yano
         public bool Detected
         {
             get
-            { return !string.IsNullOrEmpty(resouceName) && key1 != null && key2 != null; }
+            { return !string.IsNullOrEmpty(resouceName) && key1 != -1 && key2 != -1; }
         }
         public string Name
         {
