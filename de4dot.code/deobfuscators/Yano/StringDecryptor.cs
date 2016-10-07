@@ -34,17 +34,17 @@ namespace de4dot.code.deobfuscators.Yano
         List<OpCode> StringDecry = new List<OpCode> {
         OpCodes.Ldc_I4 , OpCodes.Ldarg_1 ,OpCodes.Add , OpCodes.Stloc_0,OpCodes.Ldarg_0,OpCodes.Call ,OpCodes.Stloc_1 , OpCodes.Ldc_I4_0 , OpCodes.Stloc_2 , OpCodes.Ldloc_2 ,OpCodes .Ldloc_1 ,OpCodes .Ldlen , OpCodes .Conv_I4 ,OpCodes.Clt };
         MethodDef strDecryptMethod;
-        int key;
+        int key = -1;
 
         public bool Detected
         {
             get
-            {                return strDecryptMethod != null && key != null;            }
+            { return strDecryptMethod != null && key != -1; }
         }
         public MethodDef Method
         {
             get
-            {                return strDecryptMethod;            }
+            { return strDecryptMethod; }
         }
 
         public void Find()
