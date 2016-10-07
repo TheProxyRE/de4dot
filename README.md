@@ -50,6 +50,8 @@ Supported obfuscators/packers
 * MPRESS
 * NETPack
 * NetZ
+* Orange Heap
+* Phoneix Protector
 * Rummage
 * Skater.NET
 * SmartAssembly

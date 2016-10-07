@@ -300,6 +300,8 @@
     <Compile Include="deobfuscators\NetZ\ResourceDecrypter.cs" />
     <Compile Include="deobfuscators\NullStream.cs" />
     <Compile Include="deobfuscators\Operations.cs" />
+    <Compile Include="deobfuscators\PhoneixProtector\Deobfuscator.cs" />
+    <Compile Include="deobfuscators\PhoneixProtector\StringDecrypter.cs" />
     <Compile Include="deobfuscators\ProxyCallFixerBase.cs" />
     <Compile Include="deobfuscators\QuickLZ.cs" />
     <Compile Include="deobfuscators\RandomNameChecker.cs" />

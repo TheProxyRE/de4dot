@@ -92,6 +92,7 @@ namespace de4dot.cui {
                 new de4dot.code.deobfuscators.Yano.DeobfuscatorInfo(),
                 new de4dot.code.deobfuscators.NetPack.DeobfuscatorInfo(),
                 new de4dot.code.deobfuscators.NetZ.DeobfuscatorInfo(),
+                new de4dot.code.deobfuscators.PhoneixProtector.DeobfuscatorInfo(),
 
             };
 			var dict = new Dictionary<string, IDeobfuscatorInfo>();
