@@ -293,6 +293,11 @@
     <Compile Include="deobfuscators\MPRESS\Deobfuscator.cs" />
     <Compile Include="deobfuscators\MPRESS\Lzmat.cs" />
     <Compile Include="deobfuscators\MyPEImage.cs" />
+    <Compile Include="deobfuscators\NetPack\Deobfsucator.cs" />
+    <Compile Include="deobfuscators\NetPack\QuickLZ.cs" />
+    <Compile Include="deobfuscators\NetPack\ResourceDecrypter.cs" />
+    <Compile Include="deobfuscators\NetZ\Deobfuscator.cs" />
+    <Compile Include="deobfuscators\NetZ\ResourceDecrypter.cs" />
     <Compile Include="deobfuscators\NullStream.cs" />
     <Compile Include="deobfuscators\Operations.cs" />
     <Compile Include="deobfuscators\ProxyCallFixerBase.cs" />
@@ -468,9 +473,7 @@
       <LastGenOutput>CsvmResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="deobfuscators\NetZ\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>mkdir "..\$(OutDir)..\LICENSES"

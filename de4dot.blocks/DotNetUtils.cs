@@ -21,6 +21,8 @@ using System;
 using System.Collections.Generic;
 using dnlib.DotNet;
 using dnlib.DotNet.Emit;
+using System.Reflection;
+using System.IO;
 
 namespace de4dot.blocks {
 	public enum FrameworkType {
@@ -148,12 +150,45 @@ namespace de4dot.blocks {
             return null;
         }
 
-        public static Instruction FindInstruction(IList<Instruction> instructions, OpCode opcode, int index)
+
+        public static Assembly ModuleDefToAssembly(ModuleDef module)
+        {
+            try
+            {
+                MemoryStream fileBytes = new MemoryStream();
+                module.Write(fileBytes);
+
+                byte[] moduleBytes = fileBytes.ToArray();
+
+                return Assembly.Load(moduleBytes);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+
+       
+
+        public static Instruction FindInstruction(IList<Instruction> instructions, OpCode opcode, int repeat)
         {
             int i = 0;
             foreach (var instruction in instructions)
-                if (instruction.OpCode == opcode && i++ == index)
+                if (instruction.OpCode == opcode && i++ == repeat)
                     return instruction;
+            return null;
+        }
+        public static Instruction FindInstruction(IList<Instruction> instructions, OpCode opcode, int repeat, out int index)
+        {
+            index = -1;
+            int i = 0;
+            for (int j = 0; j < instructions.Count; j++)
+                if (instructions[j].OpCode == opcode && i++ == repeat)
+                {
+                    index = j;
+                    return instructions[j];
+                }
             return null;
         }
 
