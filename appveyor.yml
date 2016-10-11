@@ -1,0 +1,13 @@
+version: 1.0.{build}
+image: Visual Studio 2013
+configuration: Release
+platform: Mixed Platforms
+build:
+  project: /de4dot.sln
+  verbosity: minimal
+install:
+  - cd de4dot
+  - git submodule update --init --recursive
+artifacts:
+  - path: Release/
+    name: Release
